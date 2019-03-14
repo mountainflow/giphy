@@ -1,9 +1,11 @@
 #main {
     background-color: black;
     margin-left: 0;
+    color: white;
 }
 
 #side {
     background-color: lightslategray;
     margin-right: 0;
+    min-height: 100vh;
 }
