@@ -1,8 +1,9 @@
 $("button").on("click", function () {
+    $("#vehicles").empty();
     let x = $(this).data("search");
     console.log(x);
     let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x +
-        "&api_key=B1dUTrIeV9TDi8YKQUzZRzcTNhaln0j5&limit=5";
+        "&api_key=B1dUTrIeV9TDi8YKQUzZRzcTNhaln0j5&limit=10";
 
     $.ajax({
             url: queryURL,
@@ -12,10 +13,10 @@ $("button").on("click", function () {
             for (i = 0; i < response.data.length; i++) {
                 let vehDiv = $("<div>");
                 let vehicleImage = $("<img>").attr({
-                    "src": response.data[i].images.fixed_width.url,
+                    "src": response.data[i].images.fixed_width_still.url,
                     "data-animate": response.data[i].images.fixed_width.url,
                     "data-still": response.data[i].images.fixed_width_still.url,
-                    "data-state": "animate",
+                    "data-state": "still",
                     "class": "gif"
                 });
                 let p = $("<p>").text("rating: " + response.data[i].rating);
@@ -28,12 +29,11 @@ $("button").on("click", function () {
 })
 $("#vehicles").on("click", ".gif", function () {
     let state = $(this).attr("data-state");
-    if (state === "animate") {
-        $(this).attr("src", $(this).attr("data-still"));
-        $(this).attr("data-state", "still");
-    } else {
+    if (state === "still") {
         $(this).attr("src", $(this).attr("data-animate"));
         $(this).attr("data-state", "animate");
-        console.log("data-state= " + state);
+    } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
     }
 })

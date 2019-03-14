@@ -16,11 +16,16 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-9" id="main">
                 <div id="vehicles"></div>
             </div>
-            <div class="col-md-3">
-                <div class="sidebar">
+            <div class="col-md-3" id="side">
+                <div id="sidebar">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="vehicleChoice" placeholder="Type in your favorite vehicle...">
+                        <input class="btn btn-secondary" type="submit" value="Submit">
+                    </div>
+                    <div class="buttons"></div>
                     <button data-search="camaro">Camaro</button>
                     <button data-search="ferrari">Ferrari</button>
                     <button data-search="ducati">Ducati</button>
