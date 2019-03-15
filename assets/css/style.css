@@ -1,4 +1,19 @@
+/* make full with of viewport on right side.
+make side bar static, so when the images are scrolled the side bar doesn't move.
+Put scroll bars in the main and side divs separately.
+Add styling to all elements for spacing, etc. as needed.
+Possible header. */
+
+.full-body {
+    width: 100%;
+}
+
+.row {
+    width: 100%;
+}
+
 #main {
+    /* add background image that will lose opacity when gifs are loaded. Keep background underneath black */
     background-color: black;
     margin-left: 0;
     color: white;
