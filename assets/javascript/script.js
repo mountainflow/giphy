@@ -1,6 +1,7 @@
 $(document).ready(function () {
     // array containing the permanent buttons at the start.
     let startVehicles = ["Ferrari", "Ducati", "Koenigsegg", "Porche", "Corvette", "Kawasaki", "Bugatti", "Pagani", "Harley Davidson"];
+
     // propogates the buttons div with the permanent buttons
     for (i = 0; i < startVehicles.length; i++) {
         let startButtons = $("<input>").attr({
@@ -11,6 +12,30 @@ $(document).ready(function () {
         });
         $("#buttons").append(startButtons);
     }
+
+
+
+
+    //*************************************************************************************
+    //need to add an event listener for "Go" button that creates a new button in the buttons div with data-search and value fields from text-input
+    //also make it so if nothing is in the textbox, no button is created
+
+    let userInput = $("#vehicleChoice").val(); // Not getting the value of vehicleChoice text input
+
+    $("#userVehicle").on("click", function () {
+        let userButtons = $("<input>").attr({
+            "class": "btn btn-light",
+            "type": "button",
+            "data-search": userInput,
+            "value": userInput
+        });
+        $("#buttons").append(userButtons);
+        console.log(userInput);
+    })
+
+    //********************************************************************************************************************************************** */
+
+
     // when buttons are clicked the api is queried and divs containing images and the ratings are shown on page
     $("input:button").on("click", function () {
         $("#vehicles").empty();
@@ -25,7 +50,7 @@ $(document).ready(function () {
             })
             .then(function (response) {
                 for (i = 0; i < response.data.length; i++) {
-                    let vehDiv = $("<div>");
+                    let vehDiv = $("<div>") //******************* */need to add class to style to display inline
                     let vehicleImage = $("<img>").attr({
                         "src": response.data[i].images.fixed_width_still.url,
                         "data-animate": response.data[i].images.fixed_width.url,
@@ -41,10 +66,6 @@ $(document).ready(function () {
                 }
             })
     })
-    //*************************************************************************************
-    //need to add an event listener for "Go" button that creates a new button in the buttons div with data-search and value fields from text-input
-
-    // ********************************************************************************************
 
     // changes the state of the gif from still to animate and back on user click
     $("#vehicles").on("click", ".gif", function () {
