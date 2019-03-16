@@ -16,12 +16,13 @@ $(document).ready(function () {
 
 
 
-    //*************************************************************************************
+    //********************************************************************************************************************************************
     //need to add an event listener for "Go" button that creates a new button in the buttons div with data-search and value fields from text-input
     //also make it so if nothing is in the textbox, no button is created
 
-    let userInput = $("#vehicleChoice").val(); // Not getting the value of vehicleChoice text input
+    let userInput = $("#vehicleChoice").val().trim(); // Not getting the value of vehicleChoice text input
 
+    //create new buttons with information from the textbox
     $("#userVehicle").on("click", function () {
         let userButtons = $("<input>").attr({
             "class": "btn btn-light",
@@ -31,9 +32,10 @@ $(document).ready(function () {
         });
         $("#buttons").append(userButtons);
         console.log(userInput);
+        $("#vehicleChoice").val(""); //clears the textbox
     })
 
-    //********************************************************************************************************************************************** */
+    //*************************************************************************************************************************************************
 
 
     // when buttons are clicked the api is queried and divs containing images and the ratings are shown on page
