@@ -1,11 +1,11 @@
 $(document).ready(function () {
     // array containing the permanent buttons at the start.
-    let startVehicles = ["Ferrari", "Ducati", "Koenigsegg", "Porche", "Corvette", "Kawasaki", "Bugatti", "Pagani", "Harley Davidson"];
+    let startVehicles = ["Ferrari", "Ducati", "Koenigsegg", "Porche", "Corvette", "Kawasaki", "Bugatti", "Pagani", "Harley"];
 
     // propogates the buttons div with the permanent buttons
     for (i = 0; i < startVehicles.length; i++) {
         let startButtons = $("<input>").attr({
-            "class": "btn btn-light",
+            "class": "btn btn-light make-image",
             "type": "button",
             "data-search": startVehicles[i],
             "value": startVehicles[i]
@@ -13,33 +13,26 @@ $(document).ready(function () {
         $("#buttons").append(startButtons);
     }
 
-
-
-
     //********************************************************************************************************************************************
-    //need to add an event listener for "Go" button that creates a new button in the buttons div with data-search and value fields from text-input
-    //also make it so if nothing is in the textbox, no button is created
-
-    let userInput = $("#vehicleChoice").val().trim(); // Not getting the value of vehicleChoice text input
+    // make it so if nothing is in the textbox, no button can be created
+    // make it so if enter is hit it's the same as clicking "go"
+    // when a new item is added, automatically show that result
 
     //create new buttons with information from the textbox
     $("#userVehicle").on("click", function () {
+        let userInput = $("#vehicleChoice").val().trim();
         let userButtons = $("<input>").attr({
-            "class": "btn btn-light",
+            "class": "btn btn-light make-image",
             "type": "button",
             "data-search": userInput,
             "value": userInput
         });
         $("#buttons").append(userButtons);
-        console.log(userInput);
         $("#vehicleChoice").val(""); //clears the textbox
     })
 
-    //*************************************************************************************************************************************************
-
-
     // when buttons are clicked the api is queried and divs containing images and the ratings are shown on page
-    $("input:button").on("click", function () {
+    $("#buttons").on("click", "input:button.make-image", function () { //This line caused me a few hours of headache
         $("#vehicles").empty();
         let x = $(this).data("search");
         console.log(x);

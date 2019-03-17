@@ -14,6 +14,8 @@ Possible header. */
 
 #main {
     /* add background image that will lose opacity when gifs are loaded. Keep background underneath black */
+    background: url(../images/muscle-cars.jpg) no-repeat center center fixed;
+    background-size: cover;
     background-color: black;
     margin-left: 0;
     color: white;
