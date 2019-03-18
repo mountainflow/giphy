@@ -2,7 +2,7 @@ $(document).ready(function () {
     // array containing the permanent buttons at the start.
     let startVehicles = ["Ferrari", "Ducati", "Koenigsegg", "Porche", "Corvette", "Kawasaki", "Bugatti", "Pagani", "Harley"];
 
-    // propogates the buttons div with the permanent buttons
+    // propogate the buttons div with the permanent buttons
     for (i = 0; i < startVehicles.length; i++) {
         let startButtons = $("<input>").attr({
             "class": "btn btn-light make-image",
@@ -15,8 +15,9 @@ $(document).ready(function () {
 
     //********************************************************************************************************************************************
     // make it so if nothing is in the textbox, no button can be created
-    // make it so if enter is hit it's the same as clicking "go"
     // when a new item is added, automatically show that result
+
+    // if ($("#vehicleChoice").val().trim() !== '') {
 
     //create new buttons with information from the textbox
     $("#userVehicle").on("click", function () {
@@ -31,8 +32,26 @@ $(document).ready(function () {
         $("#vehicleChoice").val(""); //clears the textbox
     })
 
+    // creates button on enter press
+    $("#vehicleChoice").keypress(function (e) {
+        if (e.which === 13) {
+            let userInput = $("#vehicleChoice").val().trim();
+            let userButtons = $("<input>").attr({
+                "class": "btn btn-light make-image",
+                "type": "button",
+                "data-search": userInput,
+                "value": userInput
+            });
+            $("#buttons").append(userButtons);
+            $("#vehicleChoice").val(""); //clears the textbox
+            return false;
+        }
+    });
+
+    // }
+
     // when buttons are clicked the api is queried and divs containing images and the ratings are shown on page
-    $("#buttons").on("click", "input:button.make-image", function () { //This line caused me a few hours of headache
+    $("#buttons").on("click", "input:button.make-image", function (s) { //This line caused me a few hours of headache
         $("#vehicles").empty();
         let x = $(this).data("search");
         console.log(x);
@@ -58,11 +77,15 @@ $(document).ready(function () {
                     vehDiv.append(p);
                     $("#vehicles").append(vehDiv);
                     console.log(response);
+
+                    $("#main").css({
+                        "background": "opacity, 0.2"
+                    }); //need to not reduce opacity of gifs and background color, just image.
                 }
             })
     })
 
-    // changes the state of the gif from still to animate and back on user click
+    // change the state of the gif from still to animate and back on user click
     $("#vehicles").on("click", ".gif", function () {
         let state = $(this).attr("data-state");
         if (state === "still") {
