@@ -1,5 +1,4 @@
-/* make full with of viewport on right side.
-make side bar static, so when the images are scrolled the side bar doesn't move.
+/* make side bar static, so when the images are scrolled the side bar doesn't move.
 Put scroll bars in the main and side divs separately.
 Add styling to all elements for spacing, etc. as needed.
 Possible header. 
@@ -24,6 +23,32 @@ media query or css to make side bar not at bottom when small screen */
 
 #side {
     background-color: lightslategray;
+    padding-top: 2rem;
     margin-right: 0;
     min-height: 100vh;
+}
+
+.make-image {
+    margin: 10px 5px;
+}
+
+#vehicles {
+    padding-left: 1rem;
+    margin-top: 2rem;
+}
+
+.d-inline-block {
+    margin: 10px;
+    border: 5px solid white;
+}
+
+.rating {
+    border-top: 5px solid white;
+    background-color: black;
+    margin: 0;
+    padding: 0 0 4px 65px;
+}
+
+#userVehicle {
+    margin-bottom: 2rem;
 }

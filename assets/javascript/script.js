@@ -13,11 +13,12 @@ $(document).ready(function () {
         $("#buttons").append(startButtons);
     }
 
-    //********************************************************************************************************************************************
+    //================================================================================================================================
     // make it so if nothing is in the textbox, no button can be created
     // when a new item is added, automatically show that result
+    //================================================================================================================================
 
-    // if ($("#vehicleChoice").val().trim() !== '') {
+    // if ($("#vehicleChoice").val().trim() !== "") { //===================================== this just makes it so no button is created at all
 
     //create new buttons with information from the textbox
     $("#userVehicle").on("click", function () {
@@ -51,12 +52,12 @@ $(document).ready(function () {
     // }
 
     // when buttons are clicked the api is queried and divs containing images and the ratings are shown on page
-    $("#buttons").on("click", "input:button.make-image", function (s) { //This line caused me a few hours of headache
+    $("#buttons").on("click", "input:button.make-image", function () { //This line caused me a few hours of headache
         $("#vehicles").empty();
         let x = $(this).data("search");
         console.log(x);
         let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x +
-            "&api_key=B1dUTrIeV9TDi8YKQUzZRzcTNhaln0j5&limit=9";
+            "&api_key=B1dUTrIeV9TDi8YKQUzZRzcTNhaln0j5&limit=10";
 
         $.ajax({
                 url: queryURL,
@@ -64,7 +65,7 @@ $(document).ready(function () {
             })
             .then(function (response) {
                 for (i = 0; i < response.data.length; i++) {
-                    let vehDiv = $("<div>") //******************* */need to add class to style to display inline
+                    let vehDiv = $("<div>").attr("class", "d-inline-block"); //============================================need to add class to style to display inline
                     let vehicleImage = $("<img>").attr({
                         "src": response.data[i].images.fixed_width_still.url,
                         "data-animate": response.data[i].images.fixed_width.url,
@@ -72,7 +73,7 @@ $(document).ready(function () {
                         "data-state": "still",
                         "class": "gif"
                     });
-                    let p = $("<p>").text("rating: " + response.data[i].rating);
+                    let p = $("<p>").attr("class", "rating").text("rating: " + response.data[i].rating);
                     vehDiv.append(vehicleImage);
                     vehDiv.append(p);
                     $("#vehicles").append(vehDiv);
@@ -80,7 +81,7 @@ $(document).ready(function () {
 
                     $("#main").css({
                         "background": "opacity, 0.2"
-                    }); //need to not reduce opacity of gifs and background color, just image.
+                    }); //==========================================need to not reduce opacity of gifs and background color, just image.
                 }
             })
     })
