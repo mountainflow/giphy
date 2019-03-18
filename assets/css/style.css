@@ -39,14 +39,14 @@ media query or css to make side bar not at bottom when small screen */
 
 .d-inline-block {
     margin: 10px;
-    border: 5px solid white;
+    border: 8px solid white;
 }
 
 .rating {
-    border-top: 5px solid white;
+    border-top: 3px solid white;
     background-color: black;
     margin: 0;
-    padding: 0 0 4px 65px;
+    padding: 0 0 4px 45px;
 }
 
 #userVehicle {

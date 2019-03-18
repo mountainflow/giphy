@@ -14,11 +14,10 @@ $(document).ready(function () {
     }
 
     //================================================================================================================================
-    // make it so if nothing is in the textbox, no button can be created
     // when a new item is added, automatically show that result
     //================================================================================================================================
 
-    // if ($("#vehicleChoice").val().trim() !== "") { //===================================== this just makes it so no button is created at all
+    // if ($("#vehicleChoice").val().trim() !== "") { // trying to make it so if nothing is in the textbox, no button can be created, this just makes it so no button is created at all
 
     //create new buttons with information from the textbox
     $("#userVehicle").on("click", function () {
@@ -65,11 +64,11 @@ $(document).ready(function () {
             })
             .then(function (response) {
                 for (i = 0; i < response.data.length; i++) {
-                    let vehDiv = $("<div>").attr("class", "d-inline-block"); //============================================need to add class to style to display inline
+                    let vehDiv = $("<div>").attr("class", "d-inline-block");
                     let vehicleImage = $("<img>").attr({
-                        "src": response.data[i].images.fixed_width_still.url,
-                        "data-animate": response.data[i].images.fixed_width.url,
-                        "data-still": response.data[i].images.fixed_width_still.url,
+                        "src": response.data[i].images.fixed_height_still.url,
+                        "data-animate": response.data[i].images.fixed_height.url,
+                        "data-still": response.data[i].images.fixed_height_still.url,
                         "data-state": "still",
                         "class": "gif"
                     });
@@ -79,9 +78,7 @@ $(document).ready(function () {
                     $("#vehicles").append(vehDiv);
                     console.log(response);
 
-                    $("#main").css({
-                        "background": "opacity, 0.2"
-                    }); //==========================================need to not reduce opacity of gifs and background color, just image.
+                    $("#main").css("background", "opacity: 0.2"); //==========================================need to not reduce opacity of gifs and background color, just image.
                 }
             })
     })
