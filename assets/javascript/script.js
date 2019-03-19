@@ -2,6 +2,7 @@ $(document).ready(function () {
     // array containing the permanent buttons at the start.
     let startVehicles = ["Ferrari", "Ducati", "Koenigsegg", "Porche", "Corvette", "Kawasaki", "Bugatti", "Pagani", "Harley"];
 
+
     // propogate the buttons div with the permanent buttons
     for (i = 0; i < startVehicles.length; i++) {
         let startButtons = $("<input>").attr({
@@ -12,8 +13,6 @@ $(document).ready(function () {
         });
         $("#buttons").append(startButtons);
     }
-
-    //  // trying to make it so if nothing is in the textbox, no button can be created, this just makes it so no button is created at all
 
     //create new buttons with information from the textbox
     $(".userInputForm").on("submit", function (e) {
@@ -32,12 +31,20 @@ $(document).ready(function () {
         }
     })
 
+    $("#clear").on("click", function () {
+        $("#gifAmount").val("");
+    })
+
 
     function addGif(param) {
         $("#vehicles").empty();
         console.log(param);
+        let gifNumber = $("#gifAmount").val().trim();
+        if (gifNumber === "") {
+            gifNumber = 10;
+        }
         let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + param +
-            "&api_key=B1dUTrIeV9TDi8YKQUzZRzcTNhaln0j5&limit=10";
+            "&api_key=B1dUTrIeV9TDi8YKQUzZRzcTNhaln0j5&limit=" + gifNumber;
 
         $.ajax({
                 url: queryURL,
@@ -58,10 +65,6 @@ $(document).ready(function () {
                     vehDiv.append(p);
                     $("#vehicles").append(vehDiv);
                     console.log(response);
-
-                    // $("#main > background").css("opacity: 0.2"); //==========need to not reduce opacity of gifs and background color, just image.
-                    // $("#main").css("opacity", "0.2");
-
                 }
             })
     }

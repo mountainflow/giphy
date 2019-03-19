@@ -52,3 +52,7 @@ media query or css to make side bar not at bottom when small screen */
 #userVehicle {
     margin-bottom: 2rem;
 }
+
+.clearAmount {
+    margin-top: 10px;
+}
