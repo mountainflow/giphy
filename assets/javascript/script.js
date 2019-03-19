@@ -1,8 +1,6 @@
 $(document).ready(function () {
     // array containing the permanent buttons at the start.
     let startVehicles = ["Ferrari", "Ducati", "Koenigsegg", "Porche", "Corvette", "Kawasaki", "Bugatti", "Pagani", "Harley"];
-
-
     // propogate the buttons div with the permanent buttons
     for (i = 0; i < startVehicles.length; i++) {
         let startButtons = $("<input>").attr({
@@ -13,7 +11,6 @@ $(document).ready(function () {
         });
         $("#buttons").append(startButtons);
     }
-
     //create new buttons with information from the textbox
     $(".userInputForm").on("submit", function (e) {
         e.preventDefault();
@@ -30,11 +27,11 @@ $(document).ready(function () {
             addGif(userInput);
         }
     })
-
+    // clear the number of gif's to be added and default to 10
     $("#clear").on("click", function () {
         $("#gifAmount").val("");
     })
-
+    // query the api and add the gif's to the vehicles div
     function addGif(param) {
         $("#vehicles").empty();
         console.log(param);
@@ -44,7 +41,6 @@ $(document).ready(function () {
         }
         let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + param +
             "&api_key=B1dUTrIeV9TDi8YKQUzZRzcTNhaln0j5&limit=" + gifNumber;
-
         $.ajax({
                 url: queryURL,
                 method: "GET"
@@ -67,12 +63,10 @@ $(document).ready(function () {
                 }
             })
     }
-
     // when buttons are clicked the api is queried and divs containing images and the ratings are shown on page
     $("#buttons").on("click", "input:button.make-image", function () {
-        addGif($(this).data("search"))
+        addGif($(this).data("search"));
     });
-
     // change the state of the gif from still to animate and back on user click
     $("#vehicles").on("click", ".gif", function () {
         let state = $(this).attr("data-state");
