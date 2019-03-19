@@ -13,24 +13,25 @@ $(document).ready(function () {
         $("#buttons").append(startButtons);
     }
 
-    // if ($(".userInputForm").val() !== "") { // trying to make it so if nothing is in the textbox, no button can be created, this just makes it so no button is created at all
+    //  // trying to make it so if nothing is in the textbox, no button can be created, this just makes it so no button is created at all
 
     //create new buttons with information from the textbox
     $(".userInputForm").on("submit", function (e) {
         e.preventDefault();
         let userInput = $("#vehicleChoice").val().trim();
-        let userButtons = $("<input>").attr({
-            "class": "btn btn-light make-image",
-            "type": "button",
-            "data-search": userInput,
-            "value": userInput
-        });
-        $("#buttons").append(userButtons);
-        $("#vehicleChoice").val(""); //clears the textbox
-        addGif(userInput);
+        if (userInput !== "") {
+            let userButtons = $("<input>").attr({
+                "class": "btn btn-light make-image",
+                "type": "button",
+                "data-search": userInput,
+                "value": userInput
+            });
+            $("#buttons").append(userButtons);
+            $("#vehicleChoice").val(""); //clears the textbox
+            addGif(userInput);
+        }
     })
 
-    // }
 
     function addGif(param) {
         $("#vehicles").empty();
@@ -58,7 +59,9 @@ $(document).ready(function () {
                     $("#vehicles").append(vehDiv);
                     console.log(response);
 
-                    $("#main").css("background", "opacity: 0.2"); //==========need to not reduce opacity of gifs and background color, just image.
+                    // $("#main > background").css("opacity: 0.2"); //==========need to not reduce opacity of gifs and background color, just image.
+                    // $("#main").css("opacity", "0.2");
+
                 }
             })
     }
