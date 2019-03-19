@@ -56,3 +56,7 @@ media query or css to make side bar not at bottom when small screen */
 .clearAmount {
     margin-top: 10px;
 }
+
+.gif {
+    cursor: pointer;
+}

@@ -35,7 +35,6 @@ $(document).ready(function () {
         $("#gifAmount").val("");
     })
 
-
     function addGif(param) {
         $("#vehicles").empty();
         console.log(param);
