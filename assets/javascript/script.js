@@ -13,14 +13,11 @@ $(document).ready(function () {
         $("#buttons").append(startButtons);
     }
 
-    //================================================================================================================================
-    // when a new item is added, automatically show that result
-    //================================================================================================================================
-
-    // if ($("#vehicleChoice").val().trim() !== "") { // trying to make it so if nothing is in the textbox, no button can be created, this just makes it so no button is created at all
+    // if ($(".userInputForm").val() !== "") { // trying to make it so if nothing is in the textbox, no button can be created, this just makes it so no button is created at all
 
     //create new buttons with information from the textbox
-    $("#userVehicle").on("click", function () {
+    $(".userInputForm").on("submit", function (e) {
+        e.preventDefault();
         let userInput = $("#vehicleChoice").val().trim();
         let userButtons = $("<input>").attr({
             "class": "btn btn-light make-image",
@@ -30,32 +27,15 @@ $(document).ready(function () {
         });
         $("#buttons").append(userButtons);
         $("#vehicleChoice").val(""); //clears the textbox
+        addGif(userInput);
     })
-
-    // creates button on enter press
-    $("#vehicleChoice").keypress(function (e) {
-        if (e.which === 13) {
-            let userInput = $("#vehicleChoice").val().trim();
-            let userButtons = $("<input>").attr({
-                "class": "btn btn-light make-image",
-                "type": "button",
-                "data-search": userInput,
-                "value": userInput
-            });
-            $("#buttons").append(userButtons);
-            $("#vehicleChoice").val(""); //clears the textbox
-            return false;
-        }
-    });
 
     // }
 
-    // when buttons are clicked the api is queried and divs containing images and the ratings are shown on page
-    $("#buttons").on("click", "input:button.make-image", function () { //This line caused me a few hours of headache
+    function addGif(param) {
         $("#vehicles").empty();
-        let x = $(this).data("search");
-        console.log(x);
-        let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x +
+        console.log(param);
+        let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + param +
             "&api_key=B1dUTrIeV9TDi8YKQUzZRzcTNhaln0j5&limit=10";
 
         $.ajax({
@@ -78,10 +58,15 @@ $(document).ready(function () {
                     $("#vehicles").append(vehDiv);
                     console.log(response);
 
-                    $("#main").css("background", "opacity: 0.2"); //==========================================need to not reduce opacity of gifs and background color, just image.
+                    $("#main").css("background", "opacity: 0.2"); //==========need to not reduce opacity of gifs and background color, just image.
                 }
             })
-    })
+    }
+
+    // when buttons are clicked the api is queried and divs containing images and the ratings are shown on page
+    $("#buttons").on("click", "input:button.make-image", function () {
+        addGif($(this).data("search"))
+    });
 
     // change the state of the gif from still to animate and back on user click
     $("#vehicles").on("click", ".gif", function () {
